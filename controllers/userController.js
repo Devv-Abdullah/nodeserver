@@ -2,6 +2,7 @@ const User = require("../models/userModels");
 // get method to get all users
 
 const getallUsers = async (req, res) => {
+  // async => بتضيفلنا شوية ويتنغ لحتى توصل البيانات اللي عنا
   try {
     const users = await User.find();
     res.status(200).json(users);

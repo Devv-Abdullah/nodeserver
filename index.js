@@ -8,14 +8,14 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 // to take var from the .env file بنحمي الداتا
 require("dotenv").config();
-const userRouters = require("./routers/userRouters");
+const userRoutes = require("./routes/userRoutes");
 
 // the main app
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
-app.use("/api", userRouters);
+app.use("/api", userRoutes);
 
 //connect mongoose
 mongoose
