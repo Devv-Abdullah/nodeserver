@@ -10,4 +10,5 @@ const {
 routes.get("/users", getallUsers);
 routes.post("/users", createNewUser);
 routes.post("/users/role", findUserByRole);
+
 module.exports = routes;

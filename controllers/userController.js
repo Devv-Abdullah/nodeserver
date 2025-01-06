@@ -11,6 +11,8 @@ const getallUsers = async (req, res) => {
   }
 };
 
+// req => الطلب اللي بوصلني من الفرونت
+// res => الاستجابه اللي رح ترجع للفرونت
 const createNewUser = async (req, res) => {
   console.log("this api for create user");
   try {
@@ -19,11 +21,11 @@ const createNewUser = async (req, res) => {
     // create new user in the mongo model
     const newUser = new User(user);
     // save the user in the database
-    await newUser.save();
+    await newUser.save(); // await => ما يعمل ريسبونس الا تا ينعمل سيف بشكل كامل
     res.status(201).json(newUser);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: error });
+    res.status(500).json({ message: error }); //500=> في مشكله في logic
   }
 };
 
