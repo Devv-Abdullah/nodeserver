@@ -9,6 +9,7 @@ const cors = require("cors");
 // to take var from the .env file بنحمي الداتا
 require("dotenv").config();
 const userRoutes = require("./routes/userRoutes");
+const productRoutes = require("./routes/productRoutes")
 
 // the main app
 const app = express();
@@ -16,6 +17,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 app.use("/api", userRoutes);
+app.use("/api", productRoutes);
+
 
 //connect mongoose
 mongoose

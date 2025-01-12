@@ -12,7 +12,7 @@ async function getData() {
       headers: {
         "Content-Type": "application/json",
       },
-      //   body: json.stringify({ username: "admin", phone: 345667890 }),
+      // body: json.stringify({ username: "admin", phone: 345667890 }),
     })
       // تحويل البيانات إلى JSON
       .then((response) => {
@@ -30,7 +30,7 @@ async function getData() {
           var cell2 = document.createElement("td");
           var cell3 = document.createElement("td");
 
-          cell1.innerHTML = element.id;
+          cell1.innerHTML = element._id;
           cell2.innerHTML = element.username;
           cell3.innerHTML = element.phone;
           cell4.innerHTML = i;
