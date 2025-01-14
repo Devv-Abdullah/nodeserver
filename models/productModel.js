@@ -5,6 +5,7 @@ const productSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   celis: { type: String, required: true },
   category: { type: String, required: true },
+  find: { type: String, required: true },
 });
 
 module.exports = mongoose.model("product", productSchema);

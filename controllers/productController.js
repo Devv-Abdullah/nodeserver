@@ -25,4 +25,15 @@ const createNewProduct = async (req, res) => {
   }
 };
 
-module.exports = { getallProduct, createNewProduct };
+const findProduct = async (req, res) => {
+  try {
+    const find = req.body.find;
+    console.log(find);
+    const products = await Product.find({ find: find });
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ message: error });
+  }
+};
+
+module.exports = { getallProduct, createNewProduct, findProduct };
