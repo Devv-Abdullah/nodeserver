@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const User = require("../models/userModels");
 // get method to get all users
 
@@ -40,4 +41,28 @@ const findUserByRole = async (req, res) => {
   }
 };
 
-module.exports = { getallUsers, createNewUser, findUserByRole };
+// add function to delete user by id using params
+
+const deleteUserById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log("this is the id", id);
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid ID" });
+    }
+
+    const deleteUser = await User.findByIdAndDelete(id);
+
+    if (!deleteUser) {
+      res.status(404).json({ message: "User not found" });
+    } else {
+      res.status(200).json({ message: "User deleted successfully" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error });
+  }
+};
+
+module.exports = { getallUsers, createNewUser, findUserByRole, deleteUserById };
