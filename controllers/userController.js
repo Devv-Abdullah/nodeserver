@@ -65,4 +65,47 @@ const deleteUserById = async (req, res) => {
   }
 };
 
-module.exports = { getallUsers, createNewUser, findUserByRole, deleteUserById };
+// create a controller function update user by id
+const updateUserById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { username, email, role } = req.body;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).send("id not valid");
+    }
+    const userToUpdate = await User.findByIdAndUpdate(id, {
+      username,
+      email,
+      role,
+    });
+    if (!userToUpdate) {
+      res.status(404).json({ message: "User not found" });
+    } else {
+      res.status(200).json({ message: "User updated successfully" });
+    }
+  } catch {
+    res.status(500).json({ message: error });
+  }
+};
+
+// update all users buy role from admin to manager
+// create a function to update all users by role from admin to manager
+const updateAllUserByRole = async (req, res) => {
+  try {
+    const oldRole = req.body.oldRole;
+    const newRole = req.body.newRole;
+    const users = await User.updateMany({ role: oldRole }, { role: newRole });
+    res.status(200).json(users);
+  } catch {
+    res.status(500).json({ message: error });
+  }
+};
+
+module.exports = {
+  getallUsers,
+  createNewUser,
+  findUserByRole,
+  deleteUserById,
+  updateUserById,
+  updateAllUserByRole,
+};
