@@ -5,7 +5,7 @@ const User = require("../models/userModels");
 const getallUsers = async (req, res) => {
   // async => بتضيفلنا شوية ويتنغ لحتى توصل البيانات اللي عنا
   try {
-    const users = await User.find();
+    const users = await User.find(); // بتجيب كل اليوزر على شكل ليست اوف جيسون
     res.status(200).json(users);
   } catch (error) {
     console.log(error);
@@ -71,6 +71,7 @@ const updateUserById = async (req, res) => {
     const { id } = req.params;
     const { username, email, role } = req.body;
     if (!mongoose.Types.ObjectId.isValid(id)) {
+      // عشان نتاكد من id
       return res.status(404).send("id not valid");
     }
     const userToUpdate = await User.findByIdAndUpdate(id, {
